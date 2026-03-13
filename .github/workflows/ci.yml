@@ -29,7 +29,7 @@ jobs:
         run: cargo fmt --check
 
       - name: Type check
-        run: cargo check --target wasm32-wasip1
+        run: cargo check --locked --target wasm32-wasip1
 
       - name: Build extension
-        run: cargo build --target wasm32-wasip1
+        run: cargo build --locked --target wasm32-wasip1
