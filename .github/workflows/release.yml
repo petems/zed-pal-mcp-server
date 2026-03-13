@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release-zed-extension:
+    name: Release Zed Extension
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Add WASI target
+        run: rustup target add wasm32-wasip1
+
+      - name: Build release artifact
+        run: cargo build --release --target wasm32-wasip1
+
+      - name: Update Zed extensions repository
+        uses: huacnlee/zed-extension-action@v1
+        with:
+          extension-name: pal-mcp-server
+        env:
+          COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}

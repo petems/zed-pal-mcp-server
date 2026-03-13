@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  rust:
+    name: Rust Checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        run: rustup show
+
+      - name: Add WASI target
+        run: rustup target add wasm32-wasip1
+
+      - name: Check formatting
+        run: cargo fmt --check
+
+      - name: Type check
+        run: cargo check --locked --target wasm32-wasip1
+
+      - name: Build extension
+        run: cargo build --locked --target wasm32-wasip1
