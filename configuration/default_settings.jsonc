@@ -1,0 +1,12 @@
+{
+  // All PAL settings are optional. Add only the providers and options you use.
+  "openai_api_key": "",
+  "gemini_api_key": "",
+  "xai_api_key": "",
+  "openrouter_api_key": "",
+  "azure_openai_api_key": "",
+  "azure_openai_endpoint": "",
+  "default_model": "auto",
+  "log_level": "INFO",
+  "disabled_tools": "analyze,refactor,testgen,secaudit,docgen,tracer"
+}
